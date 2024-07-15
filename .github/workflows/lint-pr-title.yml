@@ -1,0 +1,16 @@
+name: Lint PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: lint-pr-title
+        uses: grafana/shared-workflows/actions/lint-pr-title@main
+        with:
+          config-path: "${{ github.workspace }}/commitlint.config.js"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
